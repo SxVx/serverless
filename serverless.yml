@@ -1,0 +1,36 @@
+service: curso-sls-hola-mundo
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-west-2
+
+plugins:
+  - serverless-offline
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+  helloUser:
+    handler: handler.helloUser
+    events:
+      - httpApi:
+          path: /user/{name}
+          method: get
+  createUser:
+    handler: handler.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+
+	
+package:
+  patterns:
+    - '!.vscode/**'
